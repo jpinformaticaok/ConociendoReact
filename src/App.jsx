@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import Titulo from "./Components/Titulo/Titulo";
+
+/*import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
@@ -17,7 +19,7 @@ function App() {
           <img src={viteLogo} className="vite" alt="Vite logo" />
         </div>
         <div>
-          <h1>Get started</h1>
+          <h1>2do Año TSDS 2026</h1>
           <p>
             Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
           </p>
@@ -120,4 +122,14 @@ function App() {
   )
 }
 
-export default App
+export default App*/
+import TodoCounter from "./Components/TodoCounter/TodoCounter";
+
+export default function App() {
+  return (
+    <>
+      <Titulo texto="Creando mi primera app en React" />
+      <TodoCounter totalTodos={5} completedTodos={3} />
+    </>
+  )
+}
