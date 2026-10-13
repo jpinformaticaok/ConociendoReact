@@ -124,12 +124,30 @@ function App() {
 
 export default App*/
 import TodoCounter from "./Components/TodoCounter/TodoCounter";
+import Alumno from "./Components/Alumno/Alumno";
+import AccionesAlumno from "./Components/AccionesAlumno/AccionesAlumno";
+import Contador from "./Components/Contador/Contador";
+import ClienteList from "./Components/ClienteList/ClienteList";
 
 export default function App() {
   return (
     <>
       <Titulo texto="Creando mi primera app en React" />
       <TodoCounter totalTodos={5} completedTodos={3} />
+      <Alumno alumno="Juan Pablo Agüero" curso="2do Año TSDS" />
+      <Boton accion={Saludo} />
+      <AccionesAlumno />
+      <Contador />
+      <ClienteList />
     </>
   )
+}
+
+function Saludo() {
+  alert("Hola, bienvenido a React") 
+}
+
+function Boton({ accion }) {
+  return <button onClick={accion}>Mostrar un saludo</button>
+  //return <button onClick={()=> alert("Hola, bienvenido a React")}>Mostrar un saludo</button>
 }
