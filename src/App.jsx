@@ -128,6 +128,7 @@ import Alumno from "./Components/Alumno/Alumno";
 import AccionesAlumno from "./Components/AccionesAlumno/AccionesAlumno";
 import Contador from "./Components/Contador/Contador";
 import ClienteList from "./Components/ClienteList/ClienteList";
+import LocalidadList from "./Components/LocalidadesList/LocalidadList";
 
 export default function App() {
   return (
@@ -139,6 +140,7 @@ export default function App() {
       <AccionesAlumno />
       <Contador />
       <ClienteList />
+      <LocalidadList />
     </>
   )
 }

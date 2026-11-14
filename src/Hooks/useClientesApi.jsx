@@ -6,12 +6,29 @@ export default function useClientesApi() {
   const [clientes, setClientes] = useState([]);
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState(null);
+  const [clienteSeleccionado, setClienteSeleccionado] = useState(null);
 
   const obtenerClientes = useCallback(async () => {
     setCargando(true);
     setError(null);
     try {
       const respuesta = await fetch(URL_BASE);
+      if (!respuesta.ok) throw new Error("Error al obtener los clientes");
+      const datos = await respuesta.json();
+      setClientes(datos);
+      return datos;
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setCargando(false);
+    }
+  }, []);
+
+const obtenerClientesEliminados = useCallback(async () => {
+    setCargando(true);
+    setError(null);
+    try {
+      const respuesta = await fetch(URL_BASE+"/deleteds");
       if (!respuesta.ok) throw new Error("Error al obtener los clientes");
       const datos = await respuesta.json();
       setClientes(datos);
@@ -93,6 +110,22 @@ export default function useClientesApi() {
     }
   }, []);
 
+  const restaurarCliente = useCallback(async (id) => {
+    setCargando(true);
+    setError(null);
+    try {
+      const respuesta = await fetch(`${URL_BASE}/restore/${id}`, {
+        method: "PUT",
+      });
+      if (!respuesta.ok) throw new Error("Error al restaurar el cliente");
+      setClientes((clientesActuales) => clientesActuales.filter((c) => c.id !== id));
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setCargando(false);
+    }
+  }, []);
+
   useEffect(() => {
     obtenerClientes();
   }, [obtenerClientes]);
@@ -102,9 +135,13 @@ export default function useClientesApi() {
     cargando,
     error,
     obtenerClientes,
+    obtenerClientesEliminados,
     obtenerClientePorId,
     crearCliente,
     actualizarCliente,
     eliminarCliente,
+    clienteSeleccionado,
+    setClienteSeleccionado,
+    restaurarCliente
   };
 }
